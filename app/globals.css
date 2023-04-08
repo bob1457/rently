@@ -8,6 +8,10 @@ body,
   height: 100%;
 }
 
+.container {
+  @apply max-w-[250] mx-auto xl:px-20 md:px-10 sm:px-2 px-4
+}
+
 /* :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
