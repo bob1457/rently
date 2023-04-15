@@ -44,9 +44,9 @@ interface ModalProps {
 
         setShowModal(false);
         setTimeout(() => {
-                // onClose()
+                onClose()
             }, 300)
-        }, [disabled])
+        }, [onClose, disabled])
     // }
 
     const handleSubmit = useCallback(() => {
@@ -85,8 +85,8 @@ interface ModalProps {
                         <div className='text-lg font-sans'>{title}</div>
                     </div>
                     {/* body */}
-                    <div className='relative p-6 flex-auto'>
-
+                    <div className='relative p-8 flex-auto'>
+                        {body}
                     </div>
                     {/* footer */}
                     <div className='flex flex-col gap-2 p-8'>
@@ -107,6 +107,7 @@ interface ModalProps {
                                 onClick={handleSubmit}
                             />
                         </div>
+                        {footer}
                     </div>
                     
                 </div>

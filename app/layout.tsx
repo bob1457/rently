@@ -1,9 +1,10 @@
 import { Nunito } from 'next/font/google'
-
+import {ClientOnly} from './components/ClientOnly'
 import './globals.css'
 import NavBar from './components/navbar/NavBar';
-import ClientOnly from './components/ClientOnly';
 import Modal from './components/modals/Modal';
+import RegisterModal from './components/modals/RegisterModal';
+import ToasterProvider from './providers/ToasterProvider';
 
 {/* <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"></link> */}
 
@@ -12,6 +13,7 @@ export const metadata = {
   description: 'Rental app for everyone',
   icons: {
     icon: '/icon.png',
+    // icon: '/favicon.ico',
   },
 }
 
@@ -29,10 +31,13 @@ export default function RootLayout({
       <body className={font.className}>
         {/* possible hydration error fix */}
         {/* <ClientOnly>
+          <RegisterModal />
           <NavBar />
         </ClientOnly> */}
-        <Modal isOpen title="hello"  />
-        <NavBar />
+        {/* <Modal isOpen title="hello"  /> */}
+        <ToasterProvider />
+        <RegisterModal />
+        <NavBar /> 
         {children}
       </body>
     </html>

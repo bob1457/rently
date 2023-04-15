@@ -8,7 +8,7 @@ interface ButtonProps {
     onClick: (e: MouseEvent) => void;
     disabled: boolean;
     outline: boolean;
-    small: boolean;
+    small?: boolean;
     icon?: IconType;
 }
 
@@ -25,7 +25,7 @@ const Button = ({
     onClick={onClick}
     disabled={disabled}
      className={`
-        relative disabled:opacity-70 disabled:cursor-not-allowed rounded-lg hover:opacity-80 transition w-full py-5
+        relative disabled:opacity-70 disabled:cursor-not-allowed rounded-lg hover:opacity-80 transition w-full py-3
         ${outline ? 'bg-white' : 'bg-rose-500'}
         ${outline ? 'border-black' : 'border-rose-500'}
         ${outline ? 'text-black' : 'text-white'}     
@@ -35,7 +35,7 @@ const Button = ({
         ${small ? 'py-1' : 'py-3'}  
     `}>
         {Icon && (
-            <Icon size={24} className="absolute left-4 top-2">
+            <Icon size={24} className="absolute left-4 top-3">
                 
             </Icon>)}
       {label}
