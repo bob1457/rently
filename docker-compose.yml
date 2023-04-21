@@ -1,16 +1,30 @@
 version: "3.9"
-services:    
-    mongo:
+services:
+    mongo1:
+        container_name: mongo1
         image: mongo
-        restart: always
-        ports:
-            - 27017:27017
         volumes:
-            - mdata:/data/db
-        # environment:
-        #     - MONGO_INITDB_ROOT_USERNAME=root
-        #     - MONGO_INITDB_ROOT_PASSWORD=root
-
+        - mdata1:/data/db
+        - ./rs-init.sh:/scripts/rs-init.sh
+        networks:
+        - mongors-network
+        ports:
+        - 27021:27017
+        links:
+        - mongo2      
+        restart: always
+        entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "dbrs" ]
+    mongo2:
+        container_name: mongo2
+        image: mongo
+        volumes:
+        - mdata2:/data/db
+        networks:
+        - mongors-network
+        ports:
+        - 27022:27017
+        restart: always
+        entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "dbrs" ] 
     mongo-express:
         image: mongo-express
         restart: always
@@ -19,11 +33,7 @@ services:
         environment:
             - ME_CONFIG_MONGODB_ADMINUSERNAME=root
             - ME_CONFIG_MONGODB_ADMINPASSWORD=root
-            - ME_CONFIG_MONGODB_URL=mongodb://mongo:27017/   
-    
-volumes:    
-    mdata:
-    
-networks: 
-    rentlynet:
-        driver: bridge
+            - ME_CONFIG_MONGODB_URL=mongodb://mongo:27017/ 
+networks:
+  mongors-network:
+    driver: bridge
