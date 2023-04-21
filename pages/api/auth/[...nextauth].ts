@@ -1,5 +1,8 @@
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import NextAuth, { AuthOptions } from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials"
+import GithubProvider from "next-auth/providers/github"
+import GoogleProvider from "next-auth/providers/google"
 
 import prisma from '@/app/libs/prismadb';
 import bcrypt from 'bcrypt'
@@ -15,7 +18,7 @@ export const authOptions: AuthOptions = {
             clientId: process.env.GOOGLE_CLIENT_ID as string,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET as string
         }),
-        CredentialProvider ({
+        CredentialsProvider ({
             name: 'credentials',
             credentials: {
                 email: {label: 'email', type: 'text'},
@@ -61,16 +64,4 @@ export const authOptions: AuthOptions = {
 
 export default NextAuth(authOptions);
 
-
-function GithubProvider(arg0: { clientId: string; clientSecret: string; }): import("next-auth/providers").Provider {
-    throw new Error("Function not implemented.");
-}
-
-function GoogleProvider(arg0: { clientId: string; clientSecret: string; }): import("next-auth/providers").Provider {
-    throw new Error("Function not implemented.");
-}
-
-function CredentialProvider(arg0: {}): import("next-auth/providers").Provider {
-    throw new Error("Function not implemented.");
-}
 
