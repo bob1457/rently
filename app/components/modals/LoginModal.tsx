@@ -51,6 +51,7 @@ const LoginModal = () => {
             redirect: false,
         })
         .then((callback) => {
+            
             setIsLoading(false);
 
             if(callback?.ok) {
@@ -59,10 +60,10 @@ const LoginModal = () => {
                 loginModal.onClose()
             }
 
-            if(callback?.error) {
-                toast.error(callback.error)
-            }
-        })
+            // if(callback?.error) {
+            //     toast.error('error!!!')//callback.error
+            // }
+        }).catch((error) => toast.error('Something went wrong'))
     }
 
     const onToggle = useCallback(() => {

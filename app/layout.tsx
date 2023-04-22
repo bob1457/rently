@@ -13,10 +13,10 @@ import getCurrentUser from './actions/getCurrentUser';
 export const metadata = {
   title: 'RENTLY',
   description: 'Rental app for everyone',
-  icons: {
-    icon: '/icon.png',
-    // icon: '/favicon.ico',
-  },
+  // icons: {
+  //   icon: '/icon.png',
+  //   // icon: '/favicon.ico',
+  // },
 }
 
 const font = Nunito({
