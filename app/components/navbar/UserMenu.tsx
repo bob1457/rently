@@ -8,10 +8,11 @@ import useRegisterModal from '@/app/hooks/useRegisterModal'
 import useLoginModal from '@/app/hooks/useLoginModal'
 import { User } from '@prisma/client'
 import { signOut } from 'next-auth/react'
+import { SafeUser } from '@/types'
 
 
 interface UserMenuProps {
-  currentUser: User | undefined
+  currentUser: SafeUser | undefined
 }
 
 const UserMenu = ({currentUser}: UserMenuProps) => {

@@ -6,9 +6,10 @@ import Logo from './Logo'
 import Search from './Search'
 import UserMenu from './UserMenu'
 import { User } from '@prisma/client'
+import { SafeUser } from '@/types'
 
 interface NavBarProps {
-  currentUser?: User | undefined
+  currentUser?: SafeUser | undefined
 }
 
 const NavBar = ({currentUser}: NavBarProps) => {
