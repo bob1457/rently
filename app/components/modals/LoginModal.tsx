@@ -40,6 +40,8 @@ const LoginModal = () => {
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
         setIsLoading(true)
 
+        console.log(data)
+
         // axios.post('/api/register', data)
         //         .then(() => {
         //             loginModal.onClose()
@@ -51,7 +53,7 @@ const LoginModal = () => {
             redirect: false,
         })
         .then((callback) => {
-            
+            console.log(callback)
             setIsLoading(false);
 
             if(callback?.ok) {

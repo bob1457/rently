@@ -8,7 +8,7 @@ import prisma from '@/app/libs/prismadb';
 import bcrypt from 'bcrypt'
 
 export const authOptions: AuthOptions = {
-    // adapter: PrismaAdapter(prisma),
+    adapter: PrismaAdapter(prisma),
     providers: [
         GithubProvider({
             clientId: process.env.GITHUB_ID as string,
@@ -25,7 +25,7 @@ export const authOptions: AuthOptions = {
                 password: {label: 'password', type: 'password'}
             },
             async authorize(credentials) {
-                if(!credentials.email || !credentials.password) {
+                if(!credentials?.email || !credentials.password) {
                     throw new Error('Invalid credentials')
                 }
 

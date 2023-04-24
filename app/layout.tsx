@@ -7,6 +7,8 @@ import RegisterModal from './components/modals/RegisterModal';
 import ToasterProvider from './providers/ToasterProvider';
 import LoginModal from './components/modals/LoginModal';
 import getCurrentUser from './actions/getCurrentUser';
+import { authOptions } from '@/pages/api/auth/[...nextauth]';
+import { getServerSession } from 'next-auth';
 
 {/* <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"></link> */}
 
@@ -29,6 +31,13 @@ export default async function RootLayout({
   children: React.ReactNode
 }) {
   const currentUser = await getCurrentUser();
+
+  console.log('logged in user', currentUser)
+
+  const session = await getServerSession(authOptions)
+
+  console.log('session', session)
+
   return (
     <html lang="en">      
       <body className={font.className}>
