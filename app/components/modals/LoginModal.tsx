@@ -112,6 +112,12 @@ const LoginModal = () => {
             <Button
                 outline
                 label='Continue with Facebook'
+                icon={AiFillFacebook} // AiFillFacebook
+                onClick={() => signIn('facebook')}
+            />
+            <Button
+                outline
+                label='Continue with Github'
                 icon={AiFillGithub} // AiFillFacebook
                 onClick={() => signIn('github')}
             />
