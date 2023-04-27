@@ -10,7 +10,7 @@ import { getServerSession } from "next-auth";
 export default async function getCurrentUser() {
     try {
         const session = await getServerSession(authOptions); // getSession();
-
+        console.log('server side session', session)
         if (!session?.user?.email) {
             return null;
         }

@@ -23,8 +23,8 @@ export const authOptions: AuthOptions = {
             clientSecret: process.env.GOOGLE_CLIENT_SECRET as string
         }),
         FacebookProvider({
-            clientId: process.env.FACEBOOK_CLIENT_ID,
-            clientSecret: process.env.FACEBOOK_CLIENT_SECRET
+            clientId: process.env.FACEBOOK_CLIENT_ID!,
+            clientSecret: process.env.FACEBOOK_CLIENT_SECRET!
           }),
         CredentialsProvider ({
             name: 'credentials',
@@ -66,25 +66,51 @@ export const authOptions: AuthOptions = {
     session: {
         strategy: 'jwt'
     },
+    // callbacks: {
+    //     async session({ session, token }: any) {
+    //       if (session.user) {
+    //         session.user.id = token.sub as string;
+    //       }
+    //       // if (user?.isAdmin) token.isAdmin = user.isAdmin;
+    //       return session;
+    //     },
+    //     async jwt({ token, user, profile }: any) {
+    //         if (user?._id) {
+    //             token._id = user._id;
+    //             token.accessToken = user.access_Token
+    //             token._id = profile.id
+                
+                
+    //         }console.log('token', token._id)
+    //         return token;
+    //     },
+    //   },
     callbacks: {
-        async session({ session, token }: any) {
-          if (session.user) {
-            session.user.id = token.sub as string;
-          }
-          // if (user?.isAdmin) token.isAdmin = user.isAdmin;
-          return session;
+        session: ({ session, token }) => {
+          console.log("Session Callback", { session, token });
+          return {
+            ...session,
+            user: {
+              ...session.user,
+              id: token.id,
+              randomKey: token.randomKey,
+            },
+          };
         },
-        async jwt({ token, user, profile }: any) {
-            if (user?._id) {
-                token._id = user._id;
-                token.accessToken = user.access_Token
-                token._id = profile.id
-                
-                
-            }console.log('token', token._id)
+        jwt: ({ token, user }) => {
+            console.log("JWT Callback", { token, user });
+            if (user) {
+              const u = user as unknown as any;
+              return {
+                ...token,
+                id: u.id,
+                randomKey: u.randomKey,
+              };
+            }
             return token;
-        },
-      },
+          },
+    },
+
     secret: process.env.NEXTAUTH_SECRET
     
 };
