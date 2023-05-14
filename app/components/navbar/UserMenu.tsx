@@ -9,6 +9,7 @@ import useLoginModal from '@/app/hooks/useLoginModal'
 import { User } from '@prisma/client'
 import { signOut } from 'next-auth/react'
 import { SafeUser } from '@/types'
+import useRentModal from '@/app/hooks/useRentModal'
 
 
 interface UserMenuProps {
@@ -18,6 +19,7 @@ interface UserMenuProps {
 const UserMenu = ({currentUser}: UserMenuProps) => {
   const registerModal = useRegisterModal()
   const loginModal = useLoginModal()
+  const rentModal = useRentModal()
   
     const [isOpen, setIsOpen ] = useState(false);
 
@@ -25,10 +27,19 @@ const UserMenu = ({currentUser}: UserMenuProps) => {
         setIsOpen((value) => !value);
     }, [])
 
+  const onRent = useCallback(() =>{
+    if(!currentUser){
+      return loginModal.onOpen()
+    }
+
+    rentModal.onOpen()
+
+  }, [currentUser, loginModal, rentModal])
+
   return (
     <div className="relative">
       <div className="flex flex-row items-center gap-3">
-        <div className="hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer" onClick={() => {}}>
+        <div className="hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer" onClick={onRent}>
             Rent your home
         </div>
         <div onClick={toggleOpen} className="p-4 md:py-1 md:px-2 border-[1px] hover:border-neutral-200 flex flex-row items-center gap-3 rounded-full cursor-pointer hover:shadow-sm transition">
@@ -51,6 +62,8 @@ const UserMenu = ({currentUser}: UserMenuProps) => {
 
                   <MenuItem onClick={()=>{}              //   throw new Error('Function not implemented.')
                   } label={'My Properties'} />
+                  <MenuItem onClick={rentModal.onOpen}              //   throw new Error('Function not implemented.')
+                   label={'Rent My Home'} />
 
                   <hr />
 

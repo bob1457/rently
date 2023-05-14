@@ -9,6 +9,7 @@ import LoginModal from './components/modals/LoginModal';
 import getCurrentUser from './actions/getCurrentUser';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 import { getServerSession } from 'next-auth';
+import RentModal from './components/modals/RentModal';
 
 {/* <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"></link> */}
 
@@ -47,6 +48,7 @@ export default async function RootLayout({
           <NavBar />
         </ClientOnly> */}
         {/* <Modal isOpen title="hello"  /> */}
+        <RentModal />
         <ToasterProvider />
         <RegisterModal />
         <LoginModal />

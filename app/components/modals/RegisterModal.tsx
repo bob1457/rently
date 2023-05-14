@@ -6,6 +6,7 @@ import { AiFillFacebook, AiFillGithub } from 'react-icons/ai'
 import { FcGoogle } from 'react-icons/fc'
 import { useCallback, useState } from 'react'
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form' 
+ 
 
 import useRegisterModal from '@/app/hooks/useRegisterModal'
 import Modal from './Modal'
@@ -13,9 +14,11 @@ import Heading from '../Heading'
 import Input from '../inputs/Input'
 import Button from '../ui/Button'
 import toast from 'react-hot-toast'
+import useLoginModal from '@/app/hooks/useLoginModal'
 
 const RegisterModal = () => {
     const registerModal = useRegisterModal()
+    const loginModal = useLoginModal();
     const [isLoading, setIsLoading] = useState(false)
 
     const { 
@@ -42,9 +45,14 @@ const RegisterModal = () => {
                 .finally(() => setIsLoading(false))
     }
 
+    // const onToggle = useCallback(() => {
+    //     registerModal.onClose()
+    // }, [registerModal])
+
     const onToggle = useCallback(() => {
-        registerModal.onClose()
-    }, [registerModal])
+        registerModal.onClose();
+        loginModal.onOpen();
+      }, [registerModal, loginModal])
 
     const bodyContent = (
         <div className="flex flex-col gap-4">
@@ -102,7 +110,7 @@ const RegisterModal = () => {
                 <div className=''>
                     Already have an account?
                 </div>
-                <div className='text-neutral-800 cursor-pointer hover:underline' onClick={registerModal.onClose}>
+                <div className='text-neutral-800 cursor-pointer hover:underline' onClick={onToggle}>
                     Log in
                 </div>
             </div>
