@@ -40,3 +40,5 @@ Mongodb Replica set: https://blog.tericcabrel.com/mongodb-replica-set-docker-com
 Mongo Atlas: google login: bob.h.yuan@gmail.com/ 
 local account: bobhyuan/Mongo8tlas23! to mongo atlas or mongo compass
 Account help: https://stackoverflow.com/questions/55695565/error-message-mongoerror-bad-auth-authentication-failed-through-uri-string
+
+Account on Filestack: bob.h.yuan@gmail.com/Cloud4Free23!, URL: https://dev.filestack.com/login/
